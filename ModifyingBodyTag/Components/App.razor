@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="ModifyingBodyTag.styles.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <HeadOutlet @rendermode="InteractiveServer" />
+</head>
+
+<body>
+    @foreach(var renderFragment in renderFragments)
+    {
+        @renderFragment
+    }
+    <CascadingValue Value="this">
+        <Routes @rendermode="InteractiveServer" />
+        <script src="_framework/blazor.web.js"></script>
+    </CascadingValue>
+</body>
+
+</html>
+
+@code {
+    List<RenderFragment> renderFragments = new List<RenderFragment>();
+    public void AddRenderFragment(RenderFragment fragment)
+    {
+        renderFragments.Add(fragment);
+    }
+    public void RemoveRenderFragment(RenderFragment fragment)
+    {
+        renderFragments.Remove(fragment);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        return base.OnAfterRenderAsync(firstRender);
+    }
+}
